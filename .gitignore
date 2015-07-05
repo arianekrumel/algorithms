@@ -40,3 +40,6 @@ local.properties
 # TeXlipse plugin
 .texlipse
 
+/RiverCrossing.class
+/ApplicationRiverCrossing.class
+/SearchUninformed.class
