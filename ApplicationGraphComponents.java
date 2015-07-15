@@ -1,56 +1,15 @@
-/*
- * README HEADER
- * Name:    Ariane Krumel
- * Instructions:
- * 1. % javac lab1.java
- * 2. % java lab1 OR java lab1 < data
- * NOTE: Requires ArrayList and Scanner libraries
- *
- * February 19, 2015
- */
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class GraphComponents {
-
-    /*
-     * Depth-first search
-     * 
-     * @param graph Representation of graph in adjacency lists
-     * 
-     * @param marked Set of explored vertices
-     * 
-     * @param v Vertex to start DFS
-     * 
-     * @param componentNum Number to track connected part of graph
-     */
-    private static int[] dfs(ArrayList<ArrayList<Integer>> graph, int[] marked,
-            int v, int componentNum) {
-        // Mark current vertex as visited
-        marked[v] = componentNum;
-        ArrayList<Integer> vList = graph.get(v);
-
-        // Loop through every edge connected to vertex
-        for (int i = 1; i < vList.size(); i++) {
-            int child = vList.get(i);
-            // If connected vertex is not visited
-            if (marked[child] == 0) {
-                // Run DFS on that vertex
-                marked[child] = v;
-                marked = dfs(graph, marked, child, componentNum);
-            }
-        }
-        return marked;
-    }
+public class ApplicationGraphComponents {
 
     /*
      * Retrieve information from user input
-     * 
+     *
      * @param in Input stream
-     * 
+     *
      * @param verticesInGraph Number of adjacency lists
-     * 
+     *
      * @returns Graph representation in adjacency lists
      */
     private static ArrayList<ArrayList<Integer>> createLists(Scanner in,
@@ -84,14 +43,15 @@ public class GraphComponents {
         return allAdjLists;
     }
 
-    /*
+    /**
      * Output number and contents of components
      *
-     * @param verticesInGraph Number of vertices in graph
-     *
-     * @param componentsTotal Number of components in graph
-     *
-     * @param marked Set of explored vertices
+     * @param verticesInGraph
+     *            Number of vertices in graph
+     * @param componentsTotal
+     *            Number of components in graph
+     * @param marked
+     *            Set of explored vertices
      */
     public static void outputComponents(int verticesInGraph,
             int componentsTotal, int[] marked) {
@@ -127,7 +87,8 @@ public class GraphComponents {
         // Run DFS on graph
         for (int i = 1; i <= verticesInGraph; i++) {
             if (marked[i] == 0) {
-                marked = dfs(allAdjLists, marked, i, componentsTotal + 1);
+                marked = SearchUninformed.dfs(allAdjLists, marked, i,
+                        componentsTotal + 1);
                 componentsTotal++;
             }
         }

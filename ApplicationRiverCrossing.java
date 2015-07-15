@@ -4,17 +4,30 @@ import java.util.TreeMap;
 
 public class ApplicationRiverCrossing {
 
-    // Create notation of farmer, wolf, sheep and cabbage
-    static int farmer = 0;
-    static int wolf = 1;
-    static int sheep = 2;
-    static int cabbage = 3;
+    /**
+     * Create notation of farmer, wolf, sheep and cabbage
+     */
+    public static int farmer = 0;
+    public static int wolf = 1;
+    public static int sheep = 2;
+    public static int cabbage = 3;
 
-    static int[] goal = new int[] { 1, 1, 1, 1 };
+    /**
+     * Goal state
+     */
+    public static int[] goal = new int[] { 1, 1, 1, 1 };
 
+    /**
+     * Generate all possible states.
+     *
+     * @param withConditions
+     *            Set to true to exclude invalid states.
+     * @return List of all possible states.
+     */
     public static ArrayList<int[]> generateStates(boolean withConditions) {
         ArrayList<int[]> states = new ArrayList<int[]>();
-        // Generate all valid states
+
+        // Loop through all possible combinations
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
                 for (int k = 0; k < 2; k++) {
@@ -152,13 +165,13 @@ public class ApplicationRiverCrossing {
 
         /* Breadth First Search */
         System.out.print("Breadth-first Search");
-        SearchUninformed.search('b', statesWithConditions, transitionTable,
-                heuristic);
+        SearchUninformed.bfs(SearchType.BFS, statesWithConditions,
+                transitionTable, heuristic);
 
         /* A* Search */
         System.out.print("\n\nA* Search");
-        SearchUninformed.search('a', statesWithConditions, transitionTable,
-                heuristic);
+        SearchUninformed.bfs(SearchType.ASTAR, statesWithConditions,
+                transitionTable, heuristic);
 
     }
 }

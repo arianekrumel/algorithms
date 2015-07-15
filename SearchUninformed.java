@@ -5,15 +5,46 @@ import java.util.TreeMap;
 
 public class SearchUninformed {
 
-    // Create notation of farmer, wolf, sheep and cabbage
-    static int farmer = 0;
-    static int wolf = 1;
-    static int sheep = 2;
-    static int cabbage = 3;
+    /**
+     * Depth-first search
+     * 
+     * @param graph
+     *            Representation of graph in adjacency lists
+     * @param marked
+     *            Set of explored vertices
+     * @param v
+     *            Vertex to start DFS
+     * @param componentNum
+     *            Number to track connected part of graph
+     */
+    public static int[] dfs(ArrayList<ArrayList<Integer>> graph, int[] marked,
+            int v, int componentNum) {
+        // Mark current vertex as visited
+        marked[v] = componentNum;
+        ArrayList<Integer> vList = graph.get(v);
 
-    static int[] goal = new int[] { 1, 1, 1, 1 };
+        // Loop through every edge connected to vertex
+        for (int i = 1; i < vList.size(); i++) {
+            int child = vList.get(i);
+            // If connected vertex is not visited
+            if (marked[child] == 0) {
+                // Run DFS on that vertex
+                marked[child] = v;
+                marked = dfs(graph, marked, child, componentNum);
+            }
+        }
+        return marked;
+    }
 
-    public static void search(char type, ArrayList<int[]> states,
+    /**
+     * @param states
+     *            All possible states.
+     * @param transitionTable
+     *            All transitions between states.
+     * @param heuristic
+     *            A defined method to alter procedure.
+     */
+    public static void bfs(SearchType type, ArrayList<int[]> states,
             TreeMap<Integer, ArrayList<Integer>> transitionTable,
             TreeMap<Integer, Integer> heuristic) {
 
@@ -26,20 +57,22 @@ public class SearchUninformed {
         frontier.add(element);
         previous.put(root, -1);
 
-        // while frontier is not empty
+        // Explore frontier until empty
         while (frontier.size() > 0) {
             int current = 0;
-            if (type == 'a') {
-                // Consider heuristic and path cost for A*
+
+            // Consider cost
+            if (type.equals(SearchType.ASTAR)) {
+                // A*: cost = heuristic + path cost
                 current = getSmallest(frontier)[0];
-            }
-            if (type == 'b') {
-                // Consider path cost for BFS
+            } else if (type.equals(SearchType.BFS)) {
+                // BFS: cost = path cost
                 current = frontier.pop()[0];
             }
 
             explored.add(current);
-            if (Arrays.equals(goal, states.get(current))) {
+            if (Arrays.equals(ApplicationRiverCrossing.goal,
+                    states.get(current))) {
                 printPath(current, previous, states, true);
                 return;
             }
@@ -50,7 +83,7 @@ public class SearchUninformed {
                         && explored.indexOf(child) == -1) {
                     previous.put(child, current);
                     element[0] = child;
-                    if (type == 'a') {
+                    if (type.equals(SearchType.ASTAR)) {
                         element[1] = cost(child, states, previous, heuristic);
                     } else {
                         element[1] = 0;
@@ -113,22 +146,22 @@ public class SearchUninformed {
     public static void outputNice(int stateIndex, ArrayList<int[]> states) {
         int[] state = states.get(stateIndex);
         for (int i = 0; i < 2; i++) {
-            if (state[farmer] == i) {
+            if (state[ApplicationRiverCrossing.farmer] == i) {
                 System.out.print("f ");
             } else {
                 System.out.print("_ ");
             }
-            if (state[wolf] == i) {
+            if (state[ApplicationRiverCrossing.wolf] == i) {
                 System.out.print("w ");
             } else {
                 System.out.print("_ ");
             }
-            if (state[sheep] == i) {
+            if (state[ApplicationRiverCrossing.sheep] == i) {
                 System.out.print("s ");
             } else {
                 System.out.print("_ ");
             }
-            if (state[cabbage] == i) {
+            if (state[ApplicationRiverCrossing.cabbage] == i) {
                 System.out.print("c ");
             } else {
                 System.out.print("_ ");

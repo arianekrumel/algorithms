@@ -43,3 +43,8 @@ local.properties
 /RiverCrossing.class
 /ApplicationRiverCrossing.class
 /SearchUninformed.class
+/SearchUninformed$Day.class
+/SearchUninformed$SearchType.class
+/SearchType.class
+/GraphComponents.class
+/ApplicationGraphComponents.class
