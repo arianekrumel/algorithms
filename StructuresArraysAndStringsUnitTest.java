@@ -1,47 +1,67 @@
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-import org.junit.Ignore;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class StructuresArraysAndStringsUnitTest {
+    /*
+     * Test object
+     */
+    private StructuresArraysAndStrings testObject;
 
-    @Ignore
-    public void testDefault() {
-        fail("Not yet implemented");
+    @Before
+    public void setUp() {
+        this.testObject = new StructuresArraysAndStrings();
     }
 
     /**
      * Tests hasAllUniqueChars()
      */
     @Test
-    public void testIsAllUnique() {
-        StructuresArraysAndStrings testObject = new StructuresArraysAndStrings();
-
+    public void testHasAllUniqueChars() {
         // Simple fail case
-        boolean expected = false;
-        boolean actual = testObject.hasAllUniqueChars("test");
-        assertEquals(expected, actual);
+        boolean actual = this.testObject.hasAllUniqueChars("test");
+        Assert.assertFalse(actual);
 
         // Simple pass case
-        expected = true;
-        actual = testObject.hasAllUniqueChars("bar");
-        assertEquals(expected, actual);
+        actual = this.testObject.hasAllUniqueChars("bar");
+        Assert.assertTrue(actual);
 
         // Edge case, zero
-        expected = true;
-        actual = testObject.hasAllUniqueChars("");
-        assertEquals(expected, actual);
+        actual = this.testObject.hasAllUniqueChars("");
+        Assert.assertTrue(actual);
 
         // Harder, mix of white space
-        expected = false;
-        actual = testObject
+        actual = this.testObject
                 .hasAllUniqueChars("Our mental synchronization can have but one explanation");
-        assertEquals(expected, actual);
+        Assert.assertFalse(actual);
 
         // Harder, mix of cases
-        expected = false;
-        actual = testObject.hasAllUniqueChars("FoO Bar");
-        assertEquals(expected, actual);
+        actual = this.testObject.hasAllUniqueChars("FoO Bar");
+        Assert.assertFalse(actual);
+    }
+
+    /**
+     * Tests hasAllUniqueCharsNoStructures()
+     */
+    @Test
+    public void testHasAllUniqueCharsNoStructures() {
+        // Simple fail case
+        Assert.assertFalse(this.testObject.hasAllUniqueChars("test"));
+
+        // Simple pass case
+        Assert.assertTrue(this.testObject.hasAllUniqueChars("bar"));
+
+        // Edge case, zero
+        Assert.assertTrue(this.testObject.hasAllUniqueCharsNoStructures(""));
+
+        // Edge case, one
+        Assert.assertTrue(this.testObject.hasAllUniqueCharsNoStructures("K"));
+
+        // Harder, mix of white space
+        Assert.assertFalse(this.testObject
+                .hasAllUniqueChars("Our mental synchronization can have but one explanation"));
+
+        // Harder, mix of cases
+        Assert.assertFalse(this.testObject.hasAllUniqueChars("FoO Bar"));
     }
 }

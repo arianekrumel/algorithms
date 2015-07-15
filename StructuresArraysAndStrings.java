@@ -28,4 +28,35 @@ public class StructuresArraysAndStrings {
         }
         return lAns;
     }
+
+    /**
+     * Determine if string has all unique characters with no additional data
+     * structures
+     *
+     * @param str
+     *            String to process
+     * @return true or false
+     */
+    protected boolean hasAllUniqueCharsNoStructures(String str) {
+        // recursively check every character with all others
+        boolean ans = true;
+        int lMax = str.length();
+        // base case: if there is only one or less character left in string
+        if (lMax <= 1) {
+            return ans;
+        }
+
+        // otherwise, check if the first letter matches any other
+        Character lFirst = Character.toLowerCase(str.charAt(0));
+        Character lCurrentChar;
+        for (int i = 1; i < lMax; i++) {
+            lCurrentChar = Character.toLowerCase(str.charAt(i));
+            if (lCurrentChar.equals(lFirst)) {
+                return false;
+            }
+        }
+
+        // send smaller problem back into method
+        return this.hasAllUniqueCharsNoStructures(str);
+    }
 }
