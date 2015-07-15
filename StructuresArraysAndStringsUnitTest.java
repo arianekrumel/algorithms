@@ -19,25 +19,23 @@ public class StructuresArraysAndStringsUnitTest {
     @Test
     public void testHasAllUniqueChars() {
         // Simple fail case
-        boolean actual = this.testObject.hasAllUniqueChars("test");
-        Assert.assertFalse(actual);
+        Assert.assertFalse(this.testObject.hasAllUniqueChars("test"));
 
         // Simple pass case
-        actual = this.testObject.hasAllUniqueChars("bar");
-        Assert.assertTrue(actual);
+        Assert.assertTrue(this.testObject.hasAllUniqueChars("bar"));
 
         // Edge case, zero
-        actual = this.testObject.hasAllUniqueChars("");
-        Assert.assertTrue(actual);
+        Assert.assertTrue(this.testObject.hasAllUniqueChars(""));
+
+        // Edge case, one
+        Assert.assertTrue(this.testObject.hasAllUniqueCharsNoStructures("K"));
 
         // Harder, mix of white space
-        actual = this.testObject
-                .hasAllUniqueChars("Our mental synchronization can have but one explanation");
-        Assert.assertFalse(actual);
+        Assert.assertFalse(this.testObject
+                .hasAllUniqueChars("Our mental synchronization can have but one explanation"));
 
         // Harder, mix of cases
-        actual = this.testObject.hasAllUniqueChars("FoO Bar");
-        Assert.assertFalse(actual);
+        Assert.assertFalse(this.testObject.hasAllUniqueChars("FoO Bar"));
     }
 
     /**
@@ -53,9 +51,6 @@ public class StructuresArraysAndStringsUnitTest {
 
         // Edge case, zero
         Assert.assertTrue(this.testObject.hasAllUniqueCharsNoStructures(""));
-
-        // Edge case, one
-        Assert.assertTrue(this.testObject.hasAllUniqueCharsNoStructures("K"));
 
         // Harder, mix of white space
         Assert.assertFalse(this.testObject

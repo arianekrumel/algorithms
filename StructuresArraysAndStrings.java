@@ -4,14 +4,15 @@ import java.util.Set;
 public class StructuresArraysAndStrings {
 
     /**
-     * Determine if string has all unique characters
+     * Determine if string has all unique characters.
+     * <p>
+     * Time and space complexity is O(n)
      *
      * @param str
      *            String to process
      * @return true or false
      */
     protected boolean hasAllUniqueChars(String str) {
-        boolean lAns = true;
         int lMax = str.length();
 
         // Add all characters to set
@@ -20,18 +21,19 @@ public class StructuresArraysAndStrings {
             Character lCurrentChar = Character.toLowerCase(str.charAt(i));
             if (lSet.contains(lCurrentChar)) {
                 // Change flag and stop if find duplicate
-                lAns = false;
-                break;
+                return false;
             } else {
                 lSet.add(lCurrentChar);
             }
         }
-        return lAns;
+        return true;
     }
 
     /**
      * Determine if string has all unique characters with no additional data
      * structures
+     * <p>
+     * Time complexity is O(logn) and no space
      *
      * @param str
      *            String to process
@@ -39,11 +41,11 @@ public class StructuresArraysAndStrings {
      */
     protected boolean hasAllUniqueCharsNoStructures(String str) {
         // recursively check every character with all others
-        boolean ans = true;
         int lMax = str.length();
+
         // base case: if there is only one or less character left in string
         if (lMax <= 1) {
-            return ans;
+            return true;
         }
 
         // otherwise, check if the first letter matches any other
