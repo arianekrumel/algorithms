@@ -48,3 +48,6 @@ local.properties
 /SearchType.class
 /GraphComponents.class
 /ApplicationGraphComponents.class
+/StructuresString.class
+/StructuresArraysAndStrings.class
+/StructuresArraysAndStringsUnitTest.class
