@@ -4,7 +4,7 @@ import java.util.Set;
 public class StructuresArraysAndStrings {
 
     /**
-     * Determine if string has all unique characters.
+     * Determines if string has all unique characters.
      * <p>
      * Time and space complexity is O(n)
      *
@@ -30,7 +30,7 @@ public class StructuresArraysAndStrings {
     }
 
     /**
-     * Determine if string has all unique characters with no additional data
+     * Determines if string has all unique characters with no additional data
      * structures
      * <p>
      * Time complexity is O(logn) and no space
@@ -60,5 +60,17 @@ public class StructuresArraysAndStrings {
 
         // send smaller problem back into method
         return this.hasAllUniqueCharsNoStructures(str);
+    }
+
+    /**
+     * Reverses a C-Style String.
+     */
+    protected String reverseCString(String str) {
+        String ans = "";
+        int lLength = str.length() - 1;
+
+        // switch in place
+
+        return new String(new char[] { 'c', 'b', 'a', '\0' });
     }
 }

@@ -6,11 +6,11 @@ public class StructuresArraysAndStringsUnitTest {
     /*
      * Test object
      */
-    private StructuresArraysAndStrings testObject;
+    private StructuresArraysAndStrings myTestObject;
 
     @Before
     public void setUp() {
-        this.testObject = new StructuresArraysAndStrings();
+        this.myTestObject = new StructuresArraysAndStrings();
     }
 
     /**
@@ -19,23 +19,23 @@ public class StructuresArraysAndStringsUnitTest {
     @Test
     public void testHasAllUniqueChars() {
         // Simple fail case
-        Assert.assertFalse(this.testObject.hasAllUniqueChars("test"));
+        Assert.assertFalse(this.myTestObject.hasAllUniqueChars("test"));
 
         // Simple pass case
-        Assert.assertTrue(this.testObject.hasAllUniqueChars("bar"));
+        Assert.assertTrue(this.myTestObject.hasAllUniqueChars("bar"));
 
         // Edge case, zero
-        Assert.assertTrue(this.testObject.hasAllUniqueChars(""));
+        Assert.assertTrue(this.myTestObject.hasAllUniqueChars(""));
 
         // Edge case, one
-        Assert.assertTrue(this.testObject.hasAllUniqueCharsNoStructures("K"));
+        Assert.assertTrue(this.myTestObject.hasAllUniqueCharsNoStructures("K"));
 
         // Harder, mix of white space
-        Assert.assertFalse(this.testObject
+        Assert.assertFalse(this.myTestObject
                 .hasAllUniqueChars("Our mental synchronization can have but one explanation"));
 
         // Harder, mix of cases
-        Assert.assertFalse(this.testObject.hasAllUniqueChars("FoO Bar"));
+        Assert.assertFalse(this.myTestObject.hasAllUniqueChars("FoO Bar"));
     }
 
     /**
@@ -44,19 +44,32 @@ public class StructuresArraysAndStringsUnitTest {
     @Test
     public void testHasAllUniqueCharsNoStructures() {
         // Simple fail case
-        Assert.assertFalse(this.testObject.hasAllUniqueChars("test"));
+        Assert.assertFalse(this.myTestObject.hasAllUniqueChars("test"));
 
         // Simple pass case
-        Assert.assertTrue(this.testObject.hasAllUniqueChars("bar"));
+        Assert.assertTrue(this.myTestObject.hasAllUniqueChars("bar"));
 
         // Edge case, zero
-        Assert.assertTrue(this.testObject.hasAllUniqueCharsNoStructures(""));
+        Assert.assertTrue(this.myTestObject.hasAllUniqueCharsNoStructures(""));
 
         // Harder, mix of white space
-        Assert.assertFalse(this.testObject
+        Assert.assertFalse(this.myTestObject
                 .hasAllUniqueChars("Our mental synchronization can have but one explanation"));
 
         // Harder, mix of cases
-        Assert.assertFalse(this.testObject.hasAllUniqueChars("FoO Bar"));
+        Assert.assertFalse(this.myTestObject.hasAllUniqueChars("FoO Bar"));
+    }
+
+    /**
+     * Tests reverseCString()
+     */
+    @Test
+    public void testReverseCString() {
+        String lStr = new String(new char[] { 'a', 'b', 'c', '\0' });
+        String lActual = this.myTestObject.reverseCString(lStr);
+        String lExpected = new String(new char[] { 'c', 'b', 'a', '\0' });
+
+        Assert.assertEquals(lActual, lExpected);
+
     }
 }
